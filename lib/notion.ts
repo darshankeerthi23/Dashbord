@@ -51,13 +51,16 @@ export async function getProgressData(databaseIdOverride?: string) {
 
   // Paginate through the DB in ascending date order (if present)
   while (true) {
-    const res = await notion.databases.query({
-      database_id,
-      start_cursor: cursor,
-      page_size: 100,
-      // Sort by Day/Date if it exists; if not present, Notion will ignore
-      sorts: [{ property: FIELD.dateCandidates[0], direction: "ascending" }],
-    });
+   const sortProp = FIELD.dateCandidates?.[0];
+const sorts = sortProp
+  ? [{ property: sortProp, direction: "ascending" as const }]
+  : undefined;
+
+const res = await notion.databases.query({
+  database_id: database_id,
+  page_size: 100,
+  ...(sorts ? { sorts } : {}), // only include when we have a real property name
+})
 
     rows.push(...res.results);
     if (!res.has_more || !res.next_cursor) break;
