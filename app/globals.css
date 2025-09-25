@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---- shadcn/ui dark theme tokens (slate-ish) ---- */
+:root {
+  --background: 222 47% 6%;
+  --foreground: 220 14% 96%;
+
+  --muted: 215 28% 17%;
+  --muted-foreground: 215 20% 65%;
+
+  --popover: 222 47% 6%;
+  --popover-foreground: 220 14% 96%;
+
+  --card: 222 47% 7%;
+  --card-foreground: 220 14% 96%;
+
+  --border: 217 33% 18%;
+  --input: 217 33% 18%;
+
+  --primary: 210 40% 96%;
+  --primary-foreground: 222 47% 11%;
+
+  --secondary: 217 33% 12%;
+  --secondary-foreground: 210 40% 98%;
+
+  --accent: 217 33% 12%;
+  --accent-foreground: 210 40% 98%;
+
+  --destructive: 0 62% 50%;
+  --destructive-foreground: 210 40% 98%;
+
+  --ring: 215 20% 65%;
+  --radius: 0.75rem;
+}
+
+* { @apply border-border; }
+body { @apply bg-background text-foreground; }
