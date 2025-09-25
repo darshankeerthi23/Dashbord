@@ -184,7 +184,7 @@ export default function ProgressDashboard() {
     let streak = 0;
     if (doneDayKeys.length) {
       const doneSet = new Set(doneDayKeys);
-      let cursor = new Date(doneDayKeys[doneDayKeys.length - 1]); // latest done day (UTC)
+      let cursor = new Date(doneDayKeys[doneDayKeys.length - 1]!); // latest done day (UTC)
       while (doneSet.has(utcDayKey(cursor))) {
         streak += 1;
         cursor = d3.utcDay.offset(cursor, -1);
@@ -622,7 +622,9 @@ function WeeklyVelocity({ data, goalPerWeek, onSelectWeek }: { data: Item[]; goa
         const bis = d3.bisector<{ week: Date }, Date>((d) => d.week).center;
         const idx = bis(weekly, xDate);
         const nearest = weekly[Math.max(0, Math.min(idx, weekly.length - 1))];
-        onSelectWeek(nearest.week); // ISO-UTC week start
+        if (nearest) {
+          onSelectWeek(nearest.week); // ISO-UTC week start
+        }
       });
   };
 
